@@ -1,0 +1,15 @@
+configuration:
+  SKODA_VIN:
+    name: Vehicle VIN
+    description: >
+      The 17-character VIN of your vehicle.
+
+  SKODA_KEY:
+    name: API Key
+    description: >
+      Your Skoda API key, typically starting with "msk_".
+
+  SKODA_PIN:
+    name: S-PIN
+    description: >
+      The 4-digit S-PIN used for remote commands.

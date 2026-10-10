@@ -13,3 +13,4 @@ While the application works, this "Home Assistant install repository" is under d
 
 
 ![HA](https://github.com/mem76/skodaLnxCmd/blob/master/imgs/Home_Assitant_Skoda_Public_API.png)
+

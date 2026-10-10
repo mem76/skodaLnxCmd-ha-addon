@@ -1,0 +1,16 @@
+name: "SkodaLnxCmd (Škoda API Service)"
+version: "0.0.12"
+description: "Access MySkoda vehicle data and controls via Škoda's public API"
+slug: "skodalnxcmd_service"
+startup: "once"
+arch:
+  - amd64
+  - aarch64
+options:
+  SKODA_VIN: "TMBNG123456789012"
+  SKODA_KEY: "msk_xxxxxxxxxxxx"
+  SKODA_PIN: "1234"
+schema:
+  SKODA_VIN: str
+  SKODA_KEY: password
+  SKODA_PIN: password
