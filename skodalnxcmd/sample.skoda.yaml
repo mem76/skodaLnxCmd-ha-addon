@@ -6,8 +6,10 @@
 # 3. Add the following two lines into /config/configuration.yaml                  #
 # homeassistant:                                                                  #
 #   packages: !include_dir_named packages                                         #
-# 4. Replace hostname with the one on the "apps" page                             #
-#    Example: Replace 4edeb129-skodalnxcmd-service with 4edeb129-skodalnxcmd-service #
+# 4. Hostname:                                                                    #
+#    4edeb129-skodalnxcmd-service is the default hostname. 4edeb129 is a hash of  #
+#    the repo URI, this will be the same unless the URI used has changed.         #
+#    If that is the case, you have to replace with your hostname                  #
 #                                                                                 #
 ###################################################################################
 # Copy of this file:
@@ -40,21 +42,21 @@ template:
 # Commands          
 rest_command:
   skoda_ac_start:
-    url: "http://CHANGE_ME:8080/ac/on"
+    url: "http://4edeb129-skodalnxcmd-service:8080/ac/on"
     method: POST
   skoda_ac_stop:
-    url: "http://CHANGE_ME:8080/ac/off"
+    url: "http://4edeb129-skodalnxcmd-service:8080/ac/off"
     method: POST
   skoda_charge_start:
-    url: "http://CHANGE_ME:8080/charge/on"
+    url: "http://4edeb129-skodalnxcmd-service:8080/charge/on"
     method: POST
   skoda_charge_stop:
-    url: "http://CHANGE_ME:8080/charge/off"
+    url: "http://4edeb129-skodalnxcmd-service:8080/charge/off"
     method: POST
 
 # Sensors
 rest:
-  - resource: http://CHANGE_ME:8080/status
+  - resource: http://4edeb129-skodalnxcmd-service:8080/status
     scan_interval: 300
     binary_sensor:
       - name: "Skoda Charging"
