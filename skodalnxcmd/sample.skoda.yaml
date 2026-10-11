@@ -30,6 +30,13 @@ template:
         unique_id: skoda_charge_stop
         press:
           - action: rest_command.skoda_charge_stop
+  - sensor:
+      - name: "Skoda Position"
+        state: "parked"
+        attributes:
+          latitude: "{{ states('sensor.skoda_latitude') }}"
+          longitude: "{{ states('sensor.skoda_longitude') }}"
+
 # Commands          
 rest_command:
   skoda_ac_start:
@@ -101,6 +108,7 @@ rest:
 
       - name: "Skoda AC State"
         value_template: "{{ value_json.ac_state }}"
+        icon: mdi:air-conditioner
 
       - name: "Skoda Locked Status"
         value_template: "{{ value_json.locked_status }}"
@@ -110,3 +118,22 @@ rest:
 
       - name: "Skoda Longitude"
         value_template: "{{ value_json.parking_coordinates.longitude }}"
+      
+      - name: "Skoda Key expire date"
+        unique_id: skoda_meta_api_key_expire_date
+        device_class: timestamp
+        icon: mdi:clock-end
+        value_template: "{{ value_json.meta.key_expires_date }}"
+
+      - name: "Skoda Vehicle Report Time (oldest)"
+        unique_id: skoda_meta_vehicle_report_timestamp_min
+        device_class: timestamp
+        icon: mdi:cloud-upload-outline
+        value_template: "{{ value_json.meta.vehicle_report_timestamp_min }}"
+
+      - name: "Skoda Vehicle Report Time (newest)"
+        unique_id: skoda_meta_vehicle_report_timestamp_max
+        device_class: timestamp
+        icon: mdi:cloud-upload-outline
+        value_template: "{{ value_json.meta.vehicle_report_timestamp_max }}"
+
