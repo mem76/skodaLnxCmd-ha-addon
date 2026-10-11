@@ -1,5 +1,5 @@
 name: "SkodaLnxCmd (Škoda API Service)"
-version: "0.1.0"
+version: "0.1.1"
 description: "Access MySkoda vehicle data and controls via Škoda's public API"
 slug: "skodalnxcmd_service"
 startup: "once"
