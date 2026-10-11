@@ -6,7 +6,7 @@
 ### Upcoming support:
 
 * [x] Charging on/off `v0.1`
-* [ ] Implement a HomeAssistant repo (for GUI install in HA) `v0.1.x`
+* [x] Implement a HomeAssistant repo (for GUI install in HA) `v0.1.x`
 * [ ] Stabilize REST api towards HA `v0.2`
 * [ ] AC on/off (EVs) `v0.3`
 * [ ] Heater on (ICE cars) `v0.4`

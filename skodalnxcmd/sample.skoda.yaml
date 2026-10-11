@@ -7,7 +7,7 @@
 # homeassistant:                                                                  #
 #   packages: !include_dir_named packages                                         #
 # 4. Replace hostname with the one on the "apps" page                             #
-#    Example: Replace local-skodalnxcmd-service with 4edeb129-skodalnxcmd-service #
+#    Example: Replace 4edeb129-skodalnxcmd-service with 4edeb129-skodalnxcmd-service #
 #                                                                                 #
 ###################################################################################
 # Copy of this file:
@@ -19,35 +19,35 @@ template:
       - name: "Start Skoda AC"
         unique_id: skoda_ac_start
         press:
-          - action: rest_command.skoda_ac_on
+          - action: rest_command.skoda_ac_start
   - button:
       - name: "Start Skoda Charging"
         unique_id: skoda_charge_start
         press:
-          - action: rest_command.skoda_charge_on
+          - action: rest_command.skoda_charge_start
   - button:
       - name: "Stop Skoda Charging"
         unique_id: skoda_charge_stop
         press:
-          - action: rest_command.skoda_charge_off
+          - action: rest_command.skoda_charge_stop
 # Commands          
 rest_command:
   skoda_ac_start:
-    url: "http://local-skodalnxcmd-service:8080/ac/on"
+    url: "http://CHANGE_ME:8080/ac/on"
     method: POST
   skoda_ac_stop:
-    url: "http://local-skodalnxcmd-service:8080/ac/off"
+    url: "http://CHANGE_ME:8080/ac/off"
     method: POST
   skoda_charge_start:
-    url: "http://local-skodalnxcmd-service:8080/charge/on"
+    url: "http://CHANGE_ME:8080/charge/on"
     method: POST
   skoda_charge_stop:
-    url: "http://local-skodalnxcmd-service:8080/charge/off"
+    url: "http://CHANGE_ME:8080/charge/off"
     method: POST
 
 # Sensors
 rest:
-  - resource: http://local-skodalnxcmd-service:8080/status
+  - resource: http://CHANGE_ME:8080/status
     scan_interval: 300
     binary_sensor:
       - name: "Skoda Charging"
@@ -56,7 +56,7 @@ rest:
       - name: "Skoda Charge Cable Connected"
         value_template: "{{ value_json.charge_cable_connected }}"
 
-      - name: "Skoda AirCon"
+      - name: "Skoda AC"
         value_template: "{{ value_json.ac }}"
 
       - name: "Skoda Locked"
@@ -64,7 +64,6 @@ rest:
         icon: mdi:car-door-lock
     sensor:
       - name: "Skoda State of Charge"
-        unique_id: skoda_soc
         value_template: "{{ value_json.soc }}"
         unit_of_measurement: "%"
         icon: mdi:car-electric

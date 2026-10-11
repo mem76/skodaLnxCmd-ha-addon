@@ -7,7 +7,7 @@ The 17-character VIN of the vehicle.
 The API key from MySkoda.
 
 
-# Config files
+## Config files
 
 The plugin does not, as of now, support auto-setup. This as to be done manually. 
 
@@ -16,7 +16,7 @@ The plugin does not, as of now, support auto-setup. This as to be done manually.
 2. Download config file: <br> 
    https://raw.githubusercontent.com/mem76/skodaLnxCmd-ha-addon/refs/heads/master/skodalnxcmd/sample.skoda.yaml
 3. Change host name to what you HA selected.
-   Example: `local-skodalnxcmd-service` to `4edeb129-skodalnxcmd-service `
+   Example: `CHANGE_ME` to `4edeb129-skodalnxcmd-service `
 4. Create directory `packages` in the config dir.
 5. Copy the file into this dir
 6. Add include the dir in the main config file.
@@ -25,3 +25,34 @@ The plugin does not, as of now, support auto-setup. This as to be done manually.
 homeassistant:
    packages: !include_dir_named packages
 ```
+
+# Tips & Tricks
+
+## Rate limiting
+The Škoda API has a very low rate limit, this application use adjustable cache time in order to compensate. By default, the cache-timeout is just shy of 5 min, but with heavy API usage the cache time will increase in order to compensate.
+
+For this reason it is recommended for automation to run less frequent. Note "read" functions are cached. 
+
+An additional reason for using low automation frequency is that  sending the commands from Škoda's servers to the car can take some time.
+
+```
+# Bad automation example
+# Check every min to test if charger can start.
+12:00:00: test ( can_start && charger_off ) => start charger
+12:00:02: "Start Charge sent to API, qued to car"
+12:00:03: Cache purged
+12:01:00: test ( can_start && charger_off ) => start charger
+12:01:02: "Start Charge sent to API, qued to car"
+12:01:03: Cache purged
+12:02:00: test ( can_start && charger_off ) => start charger
+12:02:02: "Start Charge sent to API, qued to car"
+12:02:03: Cache purged
+12:02:19: Car reports to Škoda "Charging started"
+12:03:00: test ( can_start && charger_off ) => abort (car is charging)
+```
+You have now used 7 API calls of the 20 allowed per hour.
+
+## Charge efficiency
+
+Modern EV have a high idle power usage, resulting in high losses if charged at low charge rate. Most model (as of 2026) only support "Current limiting" option that limits the current to 8A. It may be better that you automations pause/resume the charge in sted of toggeling the "Current limiting" option.
+
