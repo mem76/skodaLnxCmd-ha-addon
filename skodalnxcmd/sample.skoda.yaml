@@ -103,7 +103,7 @@ rest:
         icon: mdi:lightning-bolt
 
       - name: "Skoda Charging Rate"
-        value_template: "{{ value_json.charge_rate | float(0) }}"
+        value_template: "{{ value_json.charge_rate | int(0) }}"
         unit_of_measurement: "km/h"
         state_class: measurement
         icon: mdi:speedometer
