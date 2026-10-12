@@ -13,3 +13,13 @@ configuration:
     name: S-PIN
     description: >
       The 4-digit S-PIN used for remote commands.
+
+  SKODA_STATUS_TTL:
+    name: Cache time
+    description: >
+      Number of seconds to cache status (30-1800 s.)
+
+  SKODA_TARGET_TEMP:
+    name: Target Temperature
+    description: >
+      Target cabin temperature. Controls AC for EVs and heater for ICEVs.

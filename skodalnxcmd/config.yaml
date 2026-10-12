@@ -14,7 +14,12 @@ options:
   SKODA_VIN: "TMBNG123456789012"
   SKODA_KEY: "msk_xxxxxxxxxxxx"
   SKODA_PIN: "1234"
+  SKODA_STATUS_TTL: 290
+  SKODA_TARGET_TEMP: 20
 schema:
   SKODA_VIN: str
   SKODA_KEY: password
   SKODA_PIN: password
+  SKODA_STATUS_TTL: int
+  SKODA_TARGET_TEMP: int
+  
