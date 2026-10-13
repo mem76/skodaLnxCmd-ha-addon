@@ -1,4 +1,9 @@
 # Changelog
+
+## 0.2.0 - 2026-10-13
+### Changed
+- Stabilize the app
+
 ## 0.1.1 - 2026-10-11
 ### Added
 - Add current charging profile support.
