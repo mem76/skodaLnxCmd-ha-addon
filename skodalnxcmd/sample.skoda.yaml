@@ -3,37 +3,38 @@
 #                                                                                 #
 # 1. create a directory for config file (/config/packages)                        #
 # 2. copy this file into the directory (you many change the name).                #
-# 3. Add the following two lines into /config/configuration.yaml                  #
+# 3. Add the following two lines into /config/configuration.yaml (if missing)     #
 # homeassistant:                                                                  #
 #   packages: !include_dir_named packages                                         #
-# 4. Hostname:                                                                    #
-#    4edeb129-skodalnxcmd-service is the default hostname. 4edeb129 is a hash of  #
-#    the repo URI, this will be the same unless the URI used has changed.         #
-#    If that is the case, you have to replace with your hostname                  #
+#                                                                                 #
+# HA will change to the correct hostname and vehicle name if this file is fetch   #
+# via the HA web interface. If you manually copy it from GitLab you may have to   #
+# change the hostname manually                                                    #
 #                                                                                 #
 ###################################################################################
 # Copy of this file:
-# https://raw.githubusercontent.com/mem76/skodaLnxCmd-ha-addon/refs/heads/master/skodalnxcmd/sample.skoda.yaml                                                                                #
+# https://raw.githubusercontent.com/mem76/skodaLnxCmd-ha-addon/refs/heads/master/skodalnxcmd/sample.skoda.yaml
 
 # Buttons works better with an asynchronous data source.
 template:
   - button:
-      - name: "Start Skoda AC"
-        unique_id: skoda_ac_start
+      - name: "Start Škoda AC"
+        unique_id: skoda_car0_ac_start
         press:
           - action: rest_command.skoda_ac_start
   - button:
-      - name: "Start Skoda Charging"
-        unique_id: skoda_charge_start
+      - name: "Start Škoda Charging"
+        unique_id: skoda_car0_charge_start
         press:
-          - action: rest_command.skoda_charge_start
+          - action: rest_command.skoda_car0_charge_start
   - button:
-      - name: "Stop Skoda Charging"
-        unique_id: skoda_charge_stop
+      - name: "Stop Škoda Charging"
+        unique_id: skoda_car0_charge_stop
         press:
-          - action: rest_command.skoda_charge_stop
+          - action: rest_command.skoda_car0_charge_stop
   - sensor:
-      - name: "Skoda Position"
+      - name: "Škoda Position"
+        unique_id: skoda_car0_position
         state: "parked"
         attributes:
           latitude: "{{ states('sensor.skoda_latitude') }}"
@@ -41,101 +42,119 @@ template:
 
 # Commands          
 rest_command:
-  skoda_ac_start:
+  skoda_car0_ac_start:
     url: "http://4edeb129-skodalnxcmd-service:8080/ac/on"
     method: POST
-  skoda_ac_stop:
+  skoda_car0_ac_stop:
     url: "http://4edeb129-skodalnxcmd-service:8080/ac/off"
     method: POST
-  skoda_charge_start:
+  skoda_car0_charge_start:
     url: "http://4edeb129-skodalnxcmd-service:8080/charge/on"
     method: POST
-  skoda_charge_stop:
+  skoda_car0_charge_stop:
     url: "http://4edeb129-skodalnxcmd-service:8080/charge/off"
     method: POST
 
 # Sensors
 rest:
   - resource: http://4edeb129-skodalnxcmd-service:8080/status
+    # max 20 API calls per hour, with 300 interval 12 req is used for status, leaving 6 req/hour for commands.
+    # the "app" will automatically increase cache time if it detects that you are running over budget.
     scan_interval: 300
     binary_sensor:
-      - name: "Skoda Charging"
+      - name: "Škoda Charging"
+        unique_id: skoda_car0_charging
+        icon: mdi:battery-charging
         value_template: "{{ value_json.charging }}"
 
-      - name: "Skoda Charge Cable Connected"
+      - name: "Škoda Charge Cable Connected"
+        icon: mdi:ev-plug-type2
         value_template: "{{ value_json.charge_cable_connected }}"
 
-      - name: "Skoda AC"
+      - name: "Škoda AC"
+        unique_id: skoda_car0_ac
+        icon: mdi:air-conditioner
         value_template: "{{ value_json.ac }}"
 
-      - name: "Skoda Locked"
+      - name: "Škoda Locked"
+        unique_id: skoda_car0_locked
         value_template: "{{ value_json.locked }}"
         icon: mdi:car-door-lock
     sensor:
-      - name: "Skoda State of Charge"
+      - name: "Škoda State of Charge"
+        unique_id: skoda_car0_soc
         value_template: "{{ value_json.soc }}"
         unit_of_measurement: "%"
         icon: mdi:car-electric
 
-      - name: "Skoda Range"
+      - name: "Škoda Range"
+        unique_id: skoda_car0_range
         value_template: "{{ value_json.range }}"
         unit_of_measurement: "km"
 
-      - name: "Skoda Odometer"
+      - name: "Škoda Odometer"
+        unique_id: skoda_car0_odometer
         value_template: "{{ value_json.odometer }}"
         unit_of_measurement: "km"
         icon: mdi:counter
 
-      - name: "Skoda Parking Location"
+      - name: "Škoda Parking Location"
+        unique_id: skoda_car0_parking_location
         value_template: "{{ value_json.parking_location }}"
         icon: mdi:map-marker
 
-      - name: "Skoda Charge Completion"
+      - name: "Škoda Charge Completion"
+        unique_id: skoda_car0_charge_completion
         value_template: "{{ value_json.charge_done }}"
         device_class: timestamp
         icon: mdi:clock-check-outline
 
-      - name: "Skoda Charging Power"
+      - name: "Škoda Charging Power"
+        unique_id: skoda_car0_charging_power
         value_template: "{{ value_json.charge_power | float(0) }}"
         unit_of_measurement: "kW"
         device_class: power
         state_class: measurement
         icon: mdi:lightning-bolt
 
-      - name: "Skoda Charging Rate"
+      - name: "Škoda Charging Rate"
+        unique_id: skoda_car0_charging_rate
         value_template: "{{ value_json.charge_rate | int(0) }}"
         unit_of_measurement: "km/h"
         state_class: measurement
         icon: mdi:speedometer
 
-      - name: "Skoda AC State"
+      - name: "Škoda AC State"
+        unique_id: skoda_car0_ac_state
         value_template: "{{ value_json.ac_state }}"
         icon: mdi:air-conditioner
 
-      - name: "Skoda Locked Status"
+      - name: "Škoda Locked Status"
+        unique_id: skoda_car0_locked_status
         value_template: "{{ value_json.locked_status }}"
 
-      - name: "Skoda Latitude"
+      - name: "Škoda Latitude"
+        unique_id: skoda_car0_latitude
         value_template: "{{ value_json.parking_coordinates.latitude }}"
 
-      - name: "Skoda Longitude"
+      - name: "Škoda Longitude"
+        unique_id: skoda_car0_longitude
         value_template: "{{ value_json.parking_coordinates.longitude }}"
       
-      - name: "Skoda Key expire date"
-        unique_id: skoda_meta_api_key_expire_date
+      - name: "Škoda Key expire date"
+        unique_id: skoda_car0_meta_api_key_expire_date
         device_class: timestamp
         icon: mdi:clock-end
         value_template: "{{ value_json.meta.key_expires_date }}"
 
-      - name: "Skoda Vehicle Report Time (oldest)"
-        unique_id: skoda_meta_vehicle_report_timestamp_min
+      - name: "Škoda Vehicle Report Time (oldest)"
+        unique_id: skoda_car0_meta_vehicle_report_timestamp_min
         device_class: timestamp
         icon: mdi:cloud-upload-outline
         value_template: "{{ value_json.meta.vehicle_report_timestamp_min }}"
 
-      - name: "Skoda Vehicle Report Time (newest)"
-        unique_id: skoda_meta_vehicle_report_timestamp_max
+      - name: "Škoda Vehicle Report Time (newest)"
+        unique_id: skoda_car0_meta_vehicle_report_timestamp_max
         device_class: timestamp
         icon: mdi:cloud-upload-outline
         value_template: "{{ value_json.meta.vehicle_report_timestamp_max }}"
-
