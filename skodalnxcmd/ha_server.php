@@ -7,7 +7,8 @@ function getCarName():?string
     }
     $data = json_decode($jsonStr, true);
     if (@$data['meta']['vehicle_name']) {
-        return strtolower($data['meta']['vehicle_name']);
+        $return = strtolower($data['meta']['vehicle_name']);
+        return preg_replace('/[^a-z0-9]/', '', $return);
     }
     return null;
 }
