@@ -12,6 +12,8 @@ The Application uses the [MyŠkoda Public API](https://public.api.connect.skoda-
 
 To install this HA app, add this repository to HA: `https://github.com/mem76/skodaLnxCmd-ha-addon`
 
+[![Open your Home Assistant instance and show the add app repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fmem76%2FskodaLnxCmd-ha-addon)
+
 [Documentation: Installing a third-party app repository](https://www.home-assistant.io/common-tasks/os/#installing-a-third-party-app-repository)
 
 To set up you need:
