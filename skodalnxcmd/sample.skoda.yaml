@@ -85,17 +85,23 @@ rest:
         unique_id: skoda_car0_soc
         value_template: "{{ value_json.soc }}"
         unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
         icon: mdi:car-electric
 
       - name: "Škoda Range"
         unique_id: skoda_car0_range
         value_template: "{{ value_json.range }}"
+        device_class: distance
+        state_class: measurement
         unit_of_measurement: "km"
 
       - name: "Škoda Odometer"
         unique_id: skoda_car0_odometer
         value_template: "{{ value_json.odometer }}"
         unit_of_measurement: "km"
+        device_class: distance
+        state_class: total_increasing
         icon: mdi:counter
 
       - name: "Škoda Parking Location"
@@ -158,3 +164,9 @@ rest:
         device_class: timestamp
         icon: mdi:cloud-upload-outline
         value_template: "{{ value_json.meta.vehicle_report_timestamp_max }}"
+
+      - name: "Škoda Vehicle Status TTL"
+        unique_id: skoda_elroq_meta_vehicle_status_ttl
+        device_class: duration
+        unit_of_measurement: s
+        value_template: "{{ value_json.meta.cache_ttl | int(0) }}"
