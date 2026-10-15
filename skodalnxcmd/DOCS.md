@@ -1,30 +1,25 @@
 # SkodaLnxCmd
-This add-on provides access to the MySkoda API.
+This add-on provides access to the MyŠkoda API.
 ## Configuration
 ### SKODA_VIN
 The 17-character VIN of the vehicle.
 ### SKODA_KEY
-The API key from MySkoda.
-
+The API key from MyŠkoda.
+### SKODA_PIN
+The security PIN key from MyŠkoda.
 
 ## Config files
 
-The plugin does not, as of now, support auto-setup. This as to be done manually. 
+The plugin does not, support auto-setup. This as to be done manually, but the app generates a config based on data from
+HA and Škoda API.
 
-1. Install programs that able you to edit the config files.
-   <br>Example: `Terminal` or `File Explorer`.
-2. Download config file: <br> 
-   https://raw.githubusercontent.com/mem76/skodaLnxCmd-ha-addon/refs/heads/master/skodalnxcmd/sample.skoda.yaml
-3. Change host name to what you HA selected.
-   Example: `CHANGE_ME` to `4edeb129-skodalnxcmd-service `
-4. Create directory `packages` in the config dir.
-5. Copy the file into this dir
-6. Add include the dir in the main config file.
+1. Generate/fetch VIN, key and pin from MyŠkoda phone App.
+2. Set VIN, key and pin on the apps config page.
+3. Open the app's webpage in HA.
+4. Follow the instructions on the page.
 
-```yaml
-homeassistant:
-   packages: !include_dir_named packages
-```
+The template for the config file can be fetched from:<br>
+https://raw.githubusercontent.com/mem76/skodaLnxCmd-ha-addon/refs/heads/master/skodalnxcmd/sample.skoda.yaml
 
 # Tips & Tricks
 
