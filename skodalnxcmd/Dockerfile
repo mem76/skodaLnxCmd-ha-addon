@@ -1,4 +1,4 @@
-ARG container_VER=0.1.3
+ARG container_VER=0.2.0
 FROM ghcr.io/mem76/skodalnxcmd:$container_VER
 COPY sample.skoda.yaml /var/www/
 COPY ha_server.php /var/www/
