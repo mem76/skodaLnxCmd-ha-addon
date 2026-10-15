@@ -1,5 +1,12 @@
 # SkodaLnxCmd
 This add-on provides access to the MyŠkoda API.
+
+```mermaid
+flowchart TD
+    HA["Home Assistant"] <--> skodaLnxCmd
+    skodaLnxCmd <--> MySkoda["MyŠkoda Public API"] 
+    MySkoda <--> Vehicle 
+```
 ## Configuration
 ### SKODA_VIN
 The 17-character VIN of the vehicle.
@@ -7,6 +14,11 @@ The 17-character VIN of the vehicle.
 The API key from MyŠkoda.
 ### SKODA_PIN
 The security PIN key from MyŠkoda.
+
+> [!NOTE]
+> Home Assistant may report the Škoda S-PIN as a pwned secret. This is expected. Škoda uses a 4-digit S-PIN to provide
+> additional security for certain vehicle functions. Since only 10,000 possible PIN combinations exist, many valid S-PINs
+> are present in password breach databases and may trigger this warning. The warning can be safely ignored.
 
 ## Config files
 
