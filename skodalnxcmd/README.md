@@ -16,7 +16,7 @@ You need the MyŠkoda app in order to generate keys.
 * [x] Charging on/off `v0.1`
 * [x] Implement a HomeAssistant repo (for GUI install in HA) `v0.1.x`
 * [x] Stabilize REST api towards HA `v0.2`
-* [ ] Update MyŠkoda API version from 1.0 to 1.1 `v0.2.x`
+* [x] Update MyŠkoda API version from 1.0 to 1.1 `v0.2.x`
 * [ ] AC on/off (EVs) `v0.3`
 * [ ] Heater on/off (ICE cars) `v0.4`
 * [ ] Fan on/off (ICE cars) `v0.5`
