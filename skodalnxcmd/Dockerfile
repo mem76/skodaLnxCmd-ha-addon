@@ -1,4 +1,5 @@
 ARG container_VER=0.2.0
+# Fetch image https://github.com/mem76/skodaLnxCmd/blob/master/Dockerfile
 FROM ghcr.io/mem76/skodalnxcmd:$container_VER
 COPY sample.skoda.yaml /var/www/
 COPY ha_server.php /var/www/
