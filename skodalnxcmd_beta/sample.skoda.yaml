@@ -15,30 +15,71 @@
 # Copy of this file:
 # https://raw.githubusercontent.com/mem76/skodaLnxCmd-ha-addon/refs/heads/master/skodalnxcmd/sample.skoda.yaml
 
-# Buttons works better with an asynchronous data source.
+# Post HA 2026.2 compatible template
 template:
   - button:
       - name: "Start Škoda AC"
-        unique_id: skoda_car0_ac_start
+        unique_id: skoda_car0_ac_start_bridge
+        icon: mdi:air-conditioner
+        device_info: &skoda_device
+          identifiers: "skoda_car0_automobile"
+          name: "Škoda _car0_"
+          manufacturer: "Škoda"
+          model: "MyŠkoda Cloud Gateway"
         press:
-          - action: rest_command.skoda_ac_start
-  - button:
-      - name: "Start Škoda Charging"
-        unique_id: skoda_car0_charge_start
-        press:
-          - action: rest_command.skoda_car0_charge_start
-  - button:
-      - name: "Stop Škoda Charging"
-        unique_id: skoda_car0_charge_stop
-        press:
-          - action: rest_command.skoda_car0_charge_stop
+          - action: rest_command.skoda_car0_ac_start
+
   - sensor:
-      - name: "Škoda Position"
-        unique_id: skoda_car0_position
-        state: "parked"
-        attributes:
-          latitude: "{{ states('sensor.skoda_latitude') }}"
-          longitude: "{{ states('sensor.skoda_longitude') }}"
+      - name: "Škoda State of Charge"
+        unique_id: skoda_car0_soc_bridge
+        icon: mdi:car-electric
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+        device_info: *skoda_device
+        state: "{{ states('sensor.skoda_car0_soc') }}"
+
+      - name: "Škoda Range"
+        unique_id: skoda_car0_range_bridge
+        unit_of_measurement: "km"
+        device_class: distance
+        state_class: measurement
+        device_info: *skoda_device
+        state: "{{ states('sensor.skoda_car0_range') }}"
+
+  - binary_sensor:
+      - name: "Škoda Charging Status"
+        unique_id: skoda_car0_charging_bridge
+        icon: mdi:battery-charging
+        device_info: *skoda_device
+        state: "{{ states('binary_sensor.skoda_car0_charging') }}"
+
+
+# Buttons works better with an asynchronous data source.
+# Leagacy mode
+# template:
+#  - button:
+#      - name: "Start Škoda AC"
+#        unique_id: skoda_car0_ac_start
+#        press:
+#          - action: rest_command.skoda_ac_start
+#  - button:
+#      - name: "Start Škoda Charging"
+#        unique_id: skoda_car0_charge_start
+#        press:
+#          - action: rest_command.skoda_car0_charge_start
+#  - button:
+#      - name: "Stop Škoda Charging"
+#        unique_id: skoda_car0_charge_stop
+#        press:
+#          - action: rest_command.skoda_car0_charge_stop
+#  - sensor:
+#      - name: "Škoda Position"
+#        unique_id: skoda_car0_position
+#        state: "parked"
+#        attributes:
+#          latitude: "{{ states('sensor.skoda_latitude') }}"
+#          longitude: "{{ states('sensor.skoda_longitude') }}"
 
 # Commands          
 rest_command:
@@ -68,6 +109,7 @@ rest:
         value_template: "{{ value_json.charging }}"
 
       - name: "Škoda Charge Cable Connected"
+        unique_id: "skoda_car0_charge_cable_connected"
         icon: mdi:ev-plug-type2
         value_template: "{{ value_json.charge_cable_connected }}"
 
