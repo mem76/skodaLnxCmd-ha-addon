@@ -1,5 +1,5 @@
 name: "SkodaLnxCmd (Škoda API Service)"
-version: "0.2.1"
+version: "0.2.2"
 description: "Access MySkoda vehicle data and controls via Škoda's public API"
 slug: "skodalnxcmd_service"
 startup: "application"
@@ -18,10 +18,14 @@ options:
   SKODA_PIN: "1234"
   SKODA_STATUS_TTL: 290
   SKODA_TARGET_TEMP: 20
+  SKODA_ISHOME_CHARGE_PROFILE: ''
+  SKODA_ISHOME_PARKING_ADDRESS: ''
 schema:
   SKODA_VIN: str
   SKODA_KEY: password
   SKODA_PIN: password
   SKODA_STATUS_TTL: int
   SKODA_TARGET_TEMP: int
+  SKODA_ISHOME_CHARGE_PROFILE: str
+  SKODA_ISHOME_PARKING_ADDRESS: str
   

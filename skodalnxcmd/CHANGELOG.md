@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.2 - 2026-10-18
+### Added
+- New entities: 
+  - vehicle image URI
+  - is home
+- Option for disabling GPS/locations data
+- Add AC off
+
+### Changed
+- Handle negative charge rates (due to AC or battery heater)
+- Add guard code for "0km" odometer from MyŠkoda API.
+
 ## 0.2.1 - 2026-10-15
 ### Changed
 - Updated to API v1.1.0

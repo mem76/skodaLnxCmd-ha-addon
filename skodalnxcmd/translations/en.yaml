@@ -23,3 +23,13 @@ configuration:
     name: Target Temperature
     description: >
       Target cabin temperature. Controls AC for EVs and heater for ICEVs.
+      
+  SKODA_ISHOME_CHARGE_PROFILE:
+    name: Profile name when parked at home.
+    description: >
+      IS_HOME is set to true if charging profile name equal this value.
+
+  SKODA_ISHOME_PARKING_ADDRESS:
+    name: Parking address includes when pared at home.
+    description: >
+      IS_HOME is set to true if parking address includes this value.

@@ -41,6 +41,8 @@ function homeAssistantConfig(): void
         $id_pre = 'skoda_' . $carName . '_';
         $rawTemplate = file_get_contents($templatePath);
         // Replace host name placeholder
+        if ($myHostname != '4edeb129-skodalnxcmd-service')
+            $rawTemplate = str_replace('4edeb129-skodalnxcmd-service', $myHostname, $rawTemplate);
         $yamlContent = str_replace('{{ADDON_HOSTNAME}}', $myHostname, $rawTemplate);
         $yamlContent = str_replace('skoda_car0_', $id_pre , $yamlContent);
     } else if ($carName == null) {
@@ -111,6 +113,10 @@ packages: !include_dir_named packages</pre>
             });
         }
     </script>
+    
+    <ul>
+        <li>Hostname: <?php echo $myHostname;?></li>
+    </ul>
     </body>
     </html>
     <?php
