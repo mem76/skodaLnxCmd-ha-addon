@@ -1,0 +1,27 @@
+name: "SkodaLnxCmd (Škoda API Service)[BETA/TEST!!]"
+version: "0.2.1-beta"
+description: "For development and test."
+slug: "skodalnxcmd_service-beta"
+startup: "application"
+boot: "auto"
+stage: "experimental"
+advanced: true
+ingress: true
+ingress_port: 8080
+init: false
+arch:
+  - amd64
+  - aarch64
+options:
+  SKODA_VIN: "TMBNG123456789012"
+  SKODA_KEY: "msk_xxxxxxxxxxxx"
+  SKODA_PIN: "1234"
+  SKODA_STATUS_TTL: 290
+  SKODA_TARGET_TEMP: 20
+schema:
+  SKODA_VIN: str
+  SKODA_KEY: password
+  SKODA_PIN: password
+  SKODA_STATUS_TTL: int
+  SKODA_TARGET_TEMP: int
+  

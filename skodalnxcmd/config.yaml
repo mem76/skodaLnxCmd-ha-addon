@@ -4,6 +4,8 @@ description: "Access MySkoda vehicle data and controls via Škoda's public API"
 slug: "skodalnxcmd_service"
 startup: "application"
 boot: "auto"
+stage: "stable"
+advanced: false
 ingress: true
 ingress_port: 8080
 init: false
