@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 - 2026-10-18
+- Add guard config code for "0km" odometer from MyŠkoda API.
+- Fix typo in "stop AC" button.
+
 ## 0.2.2 - 2026-10-18
 ### Added
 - New entities: 

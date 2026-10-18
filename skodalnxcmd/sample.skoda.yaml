@@ -24,7 +24,7 @@ template:
           - action: rest_command.skoda_car0_ac_start
   - button:
       - name: "Stop Škoda AC"
-        unique_id: skoda_elroq_ac_stop
+        unique_id: skoda_car0_ac_stop
         press:
           - action: rest_command.skoda_car0_ac_stop
   - button:
@@ -113,7 +113,13 @@ rest:
 
       - name: "Škoda Odometer"
         unique_id: skoda_car0_odometer
-        value_template: "{{ value_json.odometer }}"
+        value_template: >
+          {% set odo = value_json.odometer %}
+          {% if odo is not none and odo | float(-1) >= 1 %}
+            {{ odo }}
+          {% else %}
+            {{ this.state if this.state is defined and this.state not in ['unknown', 'unavailable', 'None'] else 0 }}
+          {% endif %}
         unit_of_measurement: "km"
         device_class: distance
         state_class: total_increasing

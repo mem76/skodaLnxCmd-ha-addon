@@ -1,5 +1,5 @@
 name: "SkodaLnxCmd (Škoda API Service)[BETA/TEST!!]"
-version: "0.2.2-beta-1"
+version: "0.3.0-beta-0"
 description: "For development and test."
 slug: "skodalnxcmd_service-beta"
 startup: "application"
