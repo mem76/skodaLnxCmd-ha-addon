@@ -103,14 +103,14 @@ packages: !include_dir_named packages</pre>
 
     <pre id="configBlock"><?php echo htmlspecialchars($yamlContent); ?></pre>
 
-    <button onclick="copyConfig()">Copy Configuration</button>
+    <button onclick="selectConfig()">Select Configuration</button>
 
     <script>
-        function copyConfig() {
-            const text = document.getElementById('configBlock').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Configuration copied to clipboard!');
-            });
+        function selectConfig() {
+            window.getSelection()
+                .selectAllChildren(
+                    document.getElementById("configBlock")
+                );
         }
     </script>
     
