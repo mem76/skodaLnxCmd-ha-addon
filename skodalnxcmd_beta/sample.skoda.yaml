@@ -69,7 +69,8 @@ rest:
   - resource: http://4edeb129-skodalnxcmd-service:8080/status
     # max 20 API calls per hour, with 300 interval 12 req is used for status, leaving 6 req/hour for commands.
     # the "app" will automatically increase cache time if it detects that you are running over budget.
-    scan_interval: 300
+    # The numbers 60, 120, 144, 150, 180, 200, 225, 240, 300, 360, 400, 450, 600, 720, 900 divides 3600 (1 hour)
+    scan_interval: 360
     binary_sensor:
       - name: "Škoda Charging"
         unique_id: skoda_car0_charging
