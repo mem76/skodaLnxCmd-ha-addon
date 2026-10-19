@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 - 2026-10-18
+### Changed
+- Abort and return error on non-valid data.
+
 ## 0.3.0 - 2026-10-18
 - Add guard config code for "0km" odometer from MyŠkoda API.
 - Fix typo in "stop AC" button.
