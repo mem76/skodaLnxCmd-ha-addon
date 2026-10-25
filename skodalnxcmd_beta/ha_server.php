@@ -134,7 +134,41 @@ if (key_exists('HTTP_X_INGRESS_PATH', $_SERVER)) {
 switch ($_SERVER['REQUEST_URI']) {
     
     case '/status':
-        passthru('php /usr/local/bin/skodaLnxCmd.php json');
+        $errorBody['system_status']['message'] = 'ERROR: Recived data was not valid.';
+        $errorBody['system_status']['level'] = 'error';
+        $errorBody['system_status']['code'] = 503;
+        $errorBody['system_status']['updated_at'] = date(DATE_ATOM);
+
+        $output = shell_exec('php /usr/local/bin/skodaLnxCmd.php json');
+        if (!$output) {
+            http_response_code(503);
+            header('Content-type: application/json');
+            echo json_encode($errorBody);
+            error_log($errorBody['system_status']['message'] . ' URI: ' . $_SERVER['REQUEST_URI']);
+            exit;
+        }
+        $array = json_decode($output, true);
+        if (!is_array($array)){
+            http_response_code(503);
+            error_log('No JSON response from ' . $_SERVER['REQUEST_URI']);
+        }
+        else if (!key_exists('odometer', $array)){
+            http_response_code(503);
+            error_log('No odometer key in response from ' . $_SERVER['REQUEST_URI']);
+        }
+        else if (!is_numeric($array['odometer']) || $array['odometer'] < 1) {
+            http_response_code(503);
+            error_log('Invalid odometer value in response from ' . $_SERVER['REQUEST_URI']);
+        }
+        
+        if (http_response_code() >= 500) {
+            header('Content-type: application/json');
+            echo json_encode($errorBody);
+            error_log($errorBody['system_status']['message'] . ' URI: ' . $_SERVER['REQUEST_URI']);
+            exit;
+        }
+        header('Content-type: application/json');
+        echo $output;
         break;
         
     case '/support':
@@ -151,6 +185,18 @@ switch ($_SERVER['REQUEST_URI']) {
         
     case '/ac/on':
         passthru('php /usr/local/bin/skodaLnxCmd.php ac');
+        break;
+
+    case '/heat/on':
+        passthru('php /usr/local/bin/skodaLnxCmd.php heat');
+        break;
+    
+    case '/heat/off':
+        passthru('php /usr/local/bin/skodaLnxCmd.php heat-off');
+        break;
+        
+    case '/vent/on':
+        passthru('php /usr/local/bin/skodaLnxCmd.php vent');
         break;
     
     case '/ac/off':
