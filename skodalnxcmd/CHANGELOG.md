@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3 - 2026-10-22
+### Changed
+- Force HA to rebuild container if OS-updates exist. (increased security)
+
 ## 0.3.2 - 2026-10-22
 ### Changed
 - None (force rebuild to force important security update)
