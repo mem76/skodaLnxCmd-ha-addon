@@ -1,4 +1,24 @@
 # Changelog
+## 0.4.0 - 2026-10-30
+
+### Changed
+- Do not store metadata into history.
+
+### Added
+- Added support for fuel heaters (untested due to lack of ICE vehicle)
+
+
+## 0.3.3 - 2026-10-22
+### Changed
+- Force HA to rebuild container if OS-updates exist. (increased security)
+
+## 0.3.2 - 2026-10-22
+### Changed
+- None (force rebuild to force important security update)
+
+## 0.3.1 - 2026-10-18
+### Changed
+- Abort and return error on non-valid data.
 
 ## 0.3.0 - 2026-10-18
 - Add guard config code for "0km" odometer from MyŠkoda API.

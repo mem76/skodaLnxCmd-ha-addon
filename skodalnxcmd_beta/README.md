@@ -18,7 +18,7 @@ You need the MyŠkoda app in order to generate keys.
 * [x] Stabilize REST api towards HA `v0.2`
 * [x] Update MyŠkoda API version from 1.0 to 1.1 `v0.2.x`
 * [x] AC on/off (EVs) `v0.3`
-* [ ] Heater on/off (ICE cars) `v0.4`
+* [x] Heater on/off (ICE cars) `v0.4`
 * [ ] Fan on/off (ICE cars) `v0.5`
 * [ ] Add "slow charge toggle" (limit to 8A)". `v0.6`
 * [ ] Enable using "current temp" for AC/heat `v0.7`
@@ -30,6 +30,8 @@ You need the MyŠkoda app in order to generate keys.
 
 ### What is not supported.
 
+#### Editing charge modes
+
 While Škoda's API supports changing the charging profile, this will not be implemented in this integration. The reason
 is that charging profile intended use is for situation when the car does not have a "smart home" connection. A user of
 Home Assignment will set up HA to start/stop charging according to power usage and energy prices making this function
@@ -37,6 +39,16 @@ redundant.
 
 This API exposes the current charging profile in order enable HA to test "is car at home" in order to prevent HA to stop
 charging while charging on a public charger.
+
+#### Camp mode
+
+Škoda vehicles has **no support** for camp mode. There is a "hack" in the MyŠkoda app that starts the AC multiple times.
+You can set up camp the same hack an automation that checks a timer counting down.
+```
+if {timer is running} && {Skoda AC is off}; then
+  turn on AC
+fi
+```
 
 ## Help needed
 
