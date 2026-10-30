@@ -1,4 +1,11 @@
 # Changelog
+## 0.4.0 - 2026-10-30
+
+### Changed
+- Do not store metadata into history.
+
+### Added
+- Added support for fuel heaters (untested due to lack of ICE vehicle)
 
 ## 0.3.3 - 2026-10-22
 ### Changed
