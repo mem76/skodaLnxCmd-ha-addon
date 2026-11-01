@@ -1,4 +1,10 @@
 # Changelog
+
+## 0.5.0 - 2026-11-05
+
+### Added
+- Added support for ventilation (untested due to lack of ICE vehicle).
+
 ## 0.4.0 - 2026-10-30
 
 ### Changed

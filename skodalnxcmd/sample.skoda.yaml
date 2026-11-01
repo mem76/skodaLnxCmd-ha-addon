@@ -42,6 +42,18 @@ template:
         press:
           - action: rest_command.skoda_car0_heat_stop
   - button:
+      - name: "Start Škoda Ventilation"
+        icon: mdi:fan
+        unique_id: skoda_car0_vent_start
+        press:
+          - action: rest_command.skoda_car0_vent_start
+  - button:
+      - name: "Stop Škoda Ventilation"
+        icon: mdi:fan-off
+        unique_id: skoda_car0_vent_stop
+        press:
+          - action: rest_command.skoda_car0_vent_stop
+  - button:
       - name: "Start Škoda Charging"
         unique_id: skoda_car0_charge_start
         press:
@@ -78,6 +90,13 @@ rest_command:
     method: POST
   skoda_car0_heat_stop:
     url: "http://4edeb129-skodalnxcmd-service:8080/heat/off"
+    method: POST
+  skoda_car0_vent_start:
+    # Start fans for cooling, ICE and some hybrids
+    url: "http://4edeb129-skodalnxcmd-service:8080/vent/on"
+    method: POST
+  skoda_car0_vent_stop:
+    url: "http://4edeb129-skodalnxcmd-service:8080/vent/off"
     method: POST
   skoda_car0_charge_start:
     # Start charging (EVs and PHEVs)

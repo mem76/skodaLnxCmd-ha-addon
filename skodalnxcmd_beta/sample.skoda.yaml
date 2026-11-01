@@ -70,10 +70,10 @@ template:
         attributes:
           latitude: "{{ states('sensor.skoda_latitude') }}"
           longitude: "{{ states('sensor.skoda_longitude') }}"
-  # - image:  ## More testing needed
+  # - image:  ## Uncomment and change sensor name in the "url"
   #    - name: "Škoda Image"
   #      unique_id: skoda_car0_vehicle_image
-  #      url: "{{ states('sensor.skoda_car0_meta_vehicle_image_uri') }}"
+  #      url: "{{ states('sensor.skoda_vehicle_image_uri') }}"
 
 # Commands          
 rest_command:

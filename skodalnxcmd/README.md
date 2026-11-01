@@ -19,7 +19,7 @@ You need the MyŠkoda app in order to generate keys.
 * [x] Update MyŠkoda API version from 1.0 to 1.1 `v0.2.x`
 * [x] AC on/off (EVs) `v0.3`
 * [x] Heater on/off (ICE cars) `v0.4`
-* [ ] Fan on/off (ICE cars) `v0.5`
+* [x] Fan on/off (ICE cars) `v0.5`
 * [ ] Add "slow charge toggle" (limit to 8A)". `v0.6`
 * [ ] Enable using "current temp" for AC/heat `v0.7`
 * [ ] Reduce log noise during API outages `v0.8`

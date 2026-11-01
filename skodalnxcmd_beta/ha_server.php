@@ -176,32 +176,48 @@ switch ($_SERVER['REQUEST_URI']) {
         break;
     
     case '/charge/on':
+        error_log('NOTE: Sending START CHARGE to API');
         passthru('php /usr/local/bin/skodaLnxCmd.php charge-on');
         break;
     
     case '/charge/off':
+        error_log('NOTE: Sending STOP CHARGE to API');
         passthru('php /usr/local/bin/skodaLnxCmd.php charge-off');
         break;
         
     case '/ac/on':
+        error_log('NOTE: Sending START AC to API.');
         passthru('php /usr/local/bin/skodaLnxCmd.php ac');
         break;
 
+    case '/ac/off':
+        error_log('NOTE: Sending STOP AC to API.');
+        passthru('php /usr/local/bin/skodaLnxCmd.php ac-stop');
+        break;
+
     case '/heat/on':
+        error_log('NOTE: Sending START HEATER to API.');
         passthru('php /usr/local/bin/skodaLnxCmd.php heat');
         break;
     
     case '/heat/off':
+        error_log('NOTE: Sending STOP HEATER to API.');
         passthru('php /usr/local/bin/skodaLnxCmd.php heat-off');
         break;
         
     case '/vent/on':
+        error_log('NOTE: Sending START VENT to API.');
         passthru('php /usr/local/bin/skodaLnxCmd.php vent');
         break;
-    
-    case '/ac/off':
+
+    case '/vent/off':
+        error_log('NOTE: Sending STOP VENT to API.');
+        passthru('php /usr/local/bin/skodaLnxCmd.php vent-off');
+        break;
+        
     case '/hvac/reset':
     case '/reset':
+        error_log('NOTE: Sending STOP HVAC to API.');
         passthru('php /usr/local/bin/skodaLnxCmd.php reset');
         break;
     
