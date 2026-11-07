@@ -33,3 +33,10 @@ configuration:
     name: Parking address includes when pared at home.
     description: >
       IS_HOME is set to true if parking address includes this value.
+
+  SKODA_CHARGE_PROFILE_FILTER:
+    name: Writable charging profiles.
+    description: >
+      Charging profile ID or name that Home Assistant is allowed to write to. 
+      Example: 'home', '1'.
+      Blank ('') or 0 = disabled.

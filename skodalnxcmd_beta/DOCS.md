@@ -7,6 +7,8 @@ flowchart TD
     skodaLnxCmd <--> MySkoda["MyŠkoda Public API"] 
     MySkoda <--> Vehicle 
 ```
+Note: [View it on GitHub](https://github.com/mem76/skodaLnxCmd-ha-addon/blob/master/skodalnxcmd/DOCS.md) if mermaid 
+graph do not show properly. 
 ## Configuration
 ### SKODA_VIN
 The 17-character VIN of the vehicle.

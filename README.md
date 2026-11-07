@@ -4,9 +4,19 @@ This addon to HomeAssistant packages the `SkodaLnxCmd - Škoda Linux Terminal ap
 
 The application provide caching and rate limiting in order to keep within the 20 req/hour limitation of the public API.
 
-The Application uses the [MyŠkoda Public API](https://public.api.connect.skoda-auto.cz/docs) (released early fall 2026), in order for this application to work you have to generate an API key via the `MySkoda app`.
+The Application uses the [MyŠkoda Public API](https://public.api.connect.skoda-auto.cz/docs) (released early fall 2026), in order for this application to work 
+you have to generate an API key via the `MySkoda app`.
 
 ![HA app preview](https://github.com/mem76/skodaLnxCmd/blob/master/imgs/Home_Assitant_Skoda_Public_API.png)
+## Support
+
+**Supported actions as of Nov. 2026:**
+* Start/stop charging
+* Set target charge SoC
+* Enable/Disable low current charging
+* Start/stop AC (EVs)
+* Start/stop aux. heater (ICE)
+* Start/stop ventilation (ICE)
 
 # Install
 

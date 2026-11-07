@@ -102,6 +102,8 @@ homeassistant:
   packages: !include_dir_named packages
     </pre>
     <p>Copy this autoconfigured block into your <code>/config/packages/skoda.yaml</code> file:</p>
+    
+    <button onclick="selectConfig()">Select Configuration</button>
 
     <pre id="configBlock"><?php echo htmlspecialchars($yamlContent); ?></pre>
 
@@ -183,6 +185,36 @@ switch ($_SERVER['REQUEST_URI']) {
     case '/charge/off':
         error_log('NOTE: Sending STOP CHARGE to API');
         passthru('php /usr/local/bin/skodaLnxCmd.php charge-off');
+        break;
+
+    case '/charge/lowcurrent':
+        error_log('NOTE: Sending LOW CURRENT to API');
+        passthru('php /usr/local/bin/skodaLnxCmd.php current-low');
+        break;
+
+    case '/charge/maxcurrent':
+        error_log('NOTE: Sending MAX CURRENT to API');
+        passthru('php /usr/local/bin/skodaLnxCmd.php current-max');
+        break;
+
+    case '/charge/target':
+        $soc = null;
+        if (!empty($_GET['soc']) && @is_numeric($_GET['soc'])) {
+            $soc = (int)$_GET['soc'];
+        }
+        if (!$soc && empty($_POST['soc'])) {
+            error_log('ERROR: Did not find soc in POST request');
+            http_response_code(500);
+            die();
+        }
+        if (!$soc && !is_numeric($_POST['soc'])) {
+            error_log("ERROR: SoC is not a number");
+            http_response_code(500);
+            die();
+        }
+        error_log('NOTE: Sending SoC target to API.');
+        $soc = (int)$_POST['soc'];
+        passthru('php /usr/local/bin/skodaLnxCmd.php charging-limit ' . $soc);
         break;
         
     case '/ac/on':

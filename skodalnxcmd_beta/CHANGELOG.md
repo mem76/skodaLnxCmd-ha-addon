@@ -1,4 +1,12 @@
 # Changelog
+## 0.6.0 - 2026-11-11
+
+### Added
+- Support for toggling low current charge mode on current charging profile.
+- New entities: charge-type and target SoC.
+
+### Changed
+- Trim current charging profile name
 
 ## 0.5.0 - 2026-11-05
 
