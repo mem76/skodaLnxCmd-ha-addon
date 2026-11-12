@@ -40,7 +40,7 @@ https://raw.githubusercontent.com/mem76/skodaLnxCmd-ha-addon/refs/heads/master/s
 ## Rate limiting
 The Škoda API has a very low rate limit, this application use adjustable cache time in order to compensate. By default, the cache-timeout is just shy of 5 min, but with heavy API usage the cache time will increase in order to compensate.
 
-For this reason it is recommended for automation to run less frequent. Note "read" functions are cached. 
+For this reason it is recommended for automation to run less frequent, or have it triggered by `Škoda Fetched from API` value.
 
 An additional reason for using low automation frequency is that  sending the commands from Škoda's servers to the car can take some time.
 
@@ -60,6 +60,24 @@ An additional reason for using low automation frequency is that  sending the com
 12:03:00: test ( can_start && charger_off ) => abort (car is charging)
 ```
 You have now used 7 API calls of the 20 allowed per hour.
+
+## Messaging API
+
+This app has a messaging API that can be used to gain feedback.
+
+* `Info`: Info like "AC start command sent".
+* `Warning`: Warnings like "Not supported by car".
+* `Error`: Error like API key error or API down.
+
+```yaml
+  # Card 
+  type: entities
+  entities:
+   - entity: sensor.skoda_latest_status
+     secondary_info:
+       - status_level
+       - last_updated
+```
 
 ## Charge efficiency
 

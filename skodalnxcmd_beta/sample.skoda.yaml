@@ -165,6 +165,21 @@ rest_command:
 
 # Sensors
 rest:
+  - resource: http://4edeb129-skodalnxcmd-service:8080/latest_status
+    scan_interval: 10
+    sensor:
+      - name: " Škoda Latest Status"
+        unique_id: skoda_car0_latest_status
+        value_template: 
+          {% if value_json.status_timestamp %}
+            {{ value_json.status_message }}
+          {% else %}
+            No recent activity
+          {% endif %}
+        icon: mdi:message-text-clock-outline
+        json_attributes:
+          - status_timestamp
+          - status_level
   - resource: http://4edeb129-skodalnxcmd-service:8080/status
     # max 20 API calls per hour, with 300 interval 12 req is used for status, leaving 6 req/hour for commands.
     # the "app" will automatically increase cache time if it detects that you are running over budget.
@@ -340,6 +355,7 @@ recorder:
   exclude:
     entity_globs:
       - sensor.skoda_*_meta_*
+      - sensor.skoda*latest_status
       - sensor.skoda_fetched_from_api*
       - sensor.skoda_key_expire_date*
       - sensor.skoda_vehicle_image_uri*
