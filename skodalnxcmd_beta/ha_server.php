@@ -12,6 +12,20 @@ function getCarName():?string
     }
     return null;
 }
+
+function getStatusMsg():?array
+{
+    $jsonStr = shell_exec('skodaLnxCmd msg 2>/dev/null');
+    if (!json_validate($jsonStr)) {
+        return null;
+    }
+    $data = json_decode($jsonStr, true);
+    if (key_exists('status_message', $data)) {
+        return $data;
+    }
+    return null;
+}
+
 function homeAssistantConfig(): void
 {
     if ($_SERVER['REQUEST_URI'] != '/' && $_SERVER['REQUEST_URI'] != '/index.php') {
@@ -50,6 +64,8 @@ function homeAssistantConfig(): void
     } else {
         $yamlContent = "# Error: Template file missing inside container.";
     }
+    
+    $status = getStatusMsg();
 
     // Config webpage
     ?>
@@ -88,11 +104,23 @@ function homeAssistantConfig(): void
             button:hover {
                 background: #0070e3;
             }
+            #msgBlock {
+                border-left: 2px solid #729fcf; 
+                margin: 10px 0;                 
+                padding-left: 12px;             
+            }
         </style>
     </head>
     <body>
     <h3>Fetch data from car</h3>
     <pre><?php echo shell_exec('skodaLnxCmd status 2>/dev/null'); ?></pre>
+    <?php if (!empty($status['status_message'])) {?>
+    <div id="msgBlock">
+    <h3>Status message</h3>
+        <h4><?php echo $status['status_level'] . ' - ' . $status['status_timestamp'];?></h4>
+        <p><?php echo $status['status_message'];?></p>
+    <?php } ?>
+    </div>
     <h3>Claimed car support</h3>
     <pre><?php echo shell_exec('skodaLnxCmd support 2>/dev/null'); ?></pre>
     <h3>Škoda Configuration Package</h3>
@@ -251,6 +279,10 @@ switch ($_SERVER['REQUEST_URI']) {
     case '/reset':
         error_log('NOTE: Sending STOP HVAC to API.');
         passthru('php /usr/local/bin/skodaLnxCmd.php reset');
+        break;
+
+    case '/latest_status':
+        passthru('php /usr/local/bin/skodaLnxCmd.php msg');
         break;
     
     default:

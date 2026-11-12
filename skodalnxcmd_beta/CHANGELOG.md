@@ -3,6 +3,7 @@
 
 ### Added
 - Support for toggling low current charge mode on current charging profile.
+- Support for setting target SoC on current charging profile.
 - New entities: charge-type and target SoC.
 
 ### Changed
