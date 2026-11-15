@@ -133,7 +133,7 @@ homeassistant:
     
     <button onclick="selectConfig()">Select Configuration</button>
 
-    <pre id="configBlock"><?php echo htmlspecialchars($yamlContent); ?></pre>
+    <pre id="configBlock"><code><?php echo htmlspecialchars($yamlContent,ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); ?></code></pre>
 
     <button onclick="selectConfig()">Select Configuration</button>
 

@@ -170,7 +170,7 @@ rest:
     sensor:
       - name: " Škoda Latest Status"
         unique_id: skoda_car0_latest_status
-        value_template: 
+        value_template: >
           {% if value_json.status_timestamp %}
             {{ value_json.status_message }}
           {% else %}

@@ -1,4 +1,9 @@
 # Changelog
+## 0.6.2 - 2026-11-15
+
+### Added
+- Messaging API
+
 ## 0.6.0 - 2026-11-11
 
 ### Added

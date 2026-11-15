@@ -70,7 +70,10 @@ This app has a messaging API that can be used to gain feedback.
 * `Error`: Error like API key error or API down.
 
 ```yaml
-  # Card 
+  ################################################
+  # Dashboard Card (Copy and paste into a        #
+  #      Manual Card on your Home Assistant UI)  #
+  ################################################
   type: entities
   entities:
    - entity: sensor.skoda_latest_status
