@@ -26,7 +26,6 @@ You need the MyŠkoda app in order to generate keys.
 * [ ] Reduce log noise during API outages `v0.8`
 * [ ] Implement data from ICE and hybrid cars.
 * [ ] Better fallback if 12V battery is low.
-* [ ] Enable auto population (no need for editing config file) `v1.0`
 * [ ] Create documentation for people with multiple cars.
 
 ### What is not supported.
